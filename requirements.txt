@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+motor>=3.3
+pymongo>=4.6
+openai
+python-dotenv
+pydantic-settings
+python-multipart
+requests

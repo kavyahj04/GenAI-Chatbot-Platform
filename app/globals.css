@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg-primary: #0f1117;
+  --bg-secondary: #161b27;
+  --bg-card: #1c2333;
+  --bg-input: #1e2537;
+  --border: #2a3347;
+  --accent: #4f8ef7;
+  --accent-hover: #3a7de8;
+  --danger: #e05c6a;
+  --danger-hover: #c94a57;
+  --text-primary: #e8edf5;
+  --text-secondary: #8892a4;
+  --text-muted: #4a5568;
+  --user-bubble: #1e3a5f;
+  --bot-bubble: #1c2333;
+  --user-bubble-border: #2d5190;
+  --bot-bubble-border: #2a3347;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'IBM Plex Sans', sans-serif;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Layout ─────────────────────────────────────── */
+
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Header ─────────────────────────────────────── */
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 28px;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  z-index: 10;
+}
+
+.chat-header h3 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: 0.3px;
+}
+
+.chat-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.session-badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.end-chat-btn {
+  background-color: transparent;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  border-radius: 6px;
+  padding: 7px 16px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: all 0.2s ease;
+}
+
+.end-chat-btn:hover {
+  background-color: var(--danger);
+  color: white;
+}
+
+/* ── Chat Box ────────────────────────────────────── */
+
+.chat-box {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px 20%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  scroll-behavior: smooth;
+}
+
+.chat-box::-webkit-scrollbar {
+  width: 4px;
+}
+
+.chat-box::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+/* ── Empty State ─────────────────────────────────── */
+
+.empty-state {
+  margin: auto;
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 40px;
+}
+
+.empty-state h2 {
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  letter-spacing: -0.3px;
+}
+
+.empty-state p {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ── Messages ────────────────────────────────────── */
+
+.message {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  animation: fadeSlideIn 0.2s ease;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message.user {
+  flex-direction: row-reverse;
+}
+
+.avatar {
+  font-size: 18px;
+  margin-top: 4px;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+
+.message-bubble {
+  padding: 11px 16px;
+  border-radius: 10px;
+  max-width: 70%;
+  line-height: 1.65;
+  font-size: 14.5px;
+  color: var(--text-primary);
+  border: 1px solid var(--bot-bubble-border);
+  background-color: var(--bot-bubble);
+}
+
+.message.user .message-bubble {
+  background-color: var(--user-bubble);
+  border-color: var(--user-bubble-border);
+  color: #c8daff;
+}
+
+/* ── Input Area ──────────────────────────────────── */
+
+.input-area {
+  padding: 16px 20%;
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid var(--border);
+  background-color: var(--bg-secondary);
+}
+
+.input-area input {
+  flex: 1;
+  padding: 12px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background-color: var(--bg-input);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-area input:focus {
+  border-color: var(--accent);
+}
+
+.input-area input::placeholder {
+  color: var(--text-muted);
+}
+
+.input-area button {
+  padding: 12px 18px;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.2s;
+  min-width: 48px;
+}
+
+.input-area button:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+}
+
+.input-area button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
