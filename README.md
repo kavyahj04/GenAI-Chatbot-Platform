@@ -1,15 +1,19 @@
 # GenAI-Chatbot-Platform
 Research chat UI built with React. Handles Prolific participant routing, Qualtrics survey integration, and LLM-powered conversations with full session and message logging.
 
-source .venv/bin/activate
+# Commands
+1. python3 -m venv .venv 
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+2. pip install -r requirements.txt
 
-brew services start mongodb-community
+2. source .venv/bin/activate
 
-uvicorn app.main:app --reload --port 8000
+3. eval "$(/opt/homebrew/bin/brew shellenv)"
 
+4. brew services start mongodb-community
 
-http://localhost:8000/docs #Swagger UI showing all API routes
+5. uvicorn app.main:app --reload --port 8000
+
+6. http://localhost:8000/docs #Swagger UI showing all API routes
 
 
