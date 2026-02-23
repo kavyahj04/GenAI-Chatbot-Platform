@@ -17,7 +17,8 @@ export default function App(){
   }
 
   const handleEndChat = () => {
-    alert("redirection to survey soon.");
+    //alert("redirection to survey soon.");
+    window.location.href = "https://binghamton.qualtrics.com/jfe/form/SV_a4v7DcbzU6gc0Ga";
   }
 
   return(
