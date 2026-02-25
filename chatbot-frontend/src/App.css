@@ -33,12 +33,18 @@ body {
   overflow: hidden;
 }
 
+<<<<<<< HEAD:src/App.css
 
+=======
+>>>>>>> b2bbd05f086ff99a1502ba5195da4073ea3ef1da:chatbot-frontend/src/App.css
 .app {
   display: flex;
   height: 100vh;
 }
+<<<<<<< HEAD:src/App.css
 
+=======
+>>>>>>> b2bbd05f086ff99a1502ba5195da4073ea3ef1da:chatbot-frontend/src/App.css
 .main {
   flex: 1;
   display: flex;
@@ -100,7 +106,10 @@ body {
   background-color: var(--danger);
   color: white;
 }
+<<<<<<< HEAD:src/App.css
 
+=======
+>>>>>>> b2bbd05f086ff99a1502ba5195da4073ea3ef1da:chatbot-frontend/src/App.css
 .chat-box {
   flex: 1;
   overflow-y: auto;
@@ -197,7 +206,10 @@ body {
   color: #c8daff;
 }
 
+<<<<<<< HEAD:src/App.css
 
+=======
+>>>>>>> b2bbd05f086ff99a1502ba5195da4073ea3ef1da:chatbot-frontend/src/App.css
 .input-area {
   padding: 16px 20%;
   display: flex;
