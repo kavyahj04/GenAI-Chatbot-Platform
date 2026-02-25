@@ -6,15 +6,44 @@ export default function App(){
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
 
-  const changeEvent = () =>
+  const urlParams = new URLSearchParams(window.location.search);
+  const prolificId = urlParams.get('PROLIFIC_PID');
+  const sessionId = urlParams.get('SESSION_ID');
+  const [turnId, setTurnId] = useState(1);
+
+  const changeEvent = async () =>
   {
     if(input.trim() === "") return;
 
     const userMessage = { sender : "user", text: input}
-    const botMessage = { sender: "bot", text: "I am a bot!" };
-    setMessages([...messages, userMessage, botMessage]);
-    setInput("");
+    setMessages(prev => [...prev, userMessage]);
+
+    try{
+      const response = await fetch("http://127.0.0.1:8000/chat",{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_message: input,
+          client_turn_id: turnId.toString(),
+          chat_session_id: "XYZ"
+        })
+      });
+
+      const data = await response.json();
+      const botMessage = { sender: "bot", text: data.response };
+      setMessages(prevMessages => [...prevMessages, botMessage]);
+      setTurnId(prevTurnId => prevTurnId + 1);
+      setInput("");
+    }
+    catch(error){
+      const errorMessage = { sender: "error", text: "Error sending message." };
+      setMessages(prev => [...prev, errorMessage]);
+      console.error("Error sending message:", error);
+    }
   }
+  
 
   const handleEndChat = () => {
     alert("redirection to survey soon.");
