@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function App(){
 
@@ -10,6 +10,8 @@ export default function App(){
   const prolificId = urlParams.get('PROLIFIC_PID');
   const sessionId = urlParams.get('SESSION_ID');
   const [turnId, setTurnId] = useState(1);
+  const [chatSessionId, setChatSessionId] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const changeEvent = async () =>
   {
@@ -48,6 +50,37 @@ export default function App(){
   const handleEndChat = () => {
     alert("redirection to survey soon.");
   }
+
+  useEffect(()=>
+    {
+      const startSession = async () => {
+        try {
+         const response = await fetch("http://127.0.0.1:8000/session/start", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            pid: "123456789",
+            study_id: "study_001",
+            prolific_session_id: "sessionId",
+            qr_pre: "qr_001",
+            experiment_id: "exp_001"  
+          })
+        });
+         const data = await response.json();
+        console.log("Session started:", data);
+        setChatSessionId(data.chat_session_id);
+
+      } catch (error) {
+        console.error("Failed to start session:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    startSession();
+    },[])
 
   return(
     <div className="app">
